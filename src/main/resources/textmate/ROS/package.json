@@ -1,0 +1,23 @@
+{
+  "name": "ROS Interface",
+  "version": "1.0.0",
+  "description": "ROS message/service/action interface syntax highlighting",
+  "categories": ["Programming Languages"],
+  "contributes": {
+    "languages": [
+      {
+        "id": "rosmsg",
+        "aliases": ["ROS Interface", "rosmsg"],
+        "extensions": [".msg", ".srv", ".action"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "rosmsg",
+        "scopeName": "source.rosmsg",
+        "path": "./ROS%20Interface.tmLanguage"
+      }
+    ]
+  }
+}
