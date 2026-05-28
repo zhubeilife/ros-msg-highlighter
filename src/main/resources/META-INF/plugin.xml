@@ -1,8 +1,8 @@
 <idea-plugin>
-    <id>org.ros.clion.ros-msg-highlighter</id>
+    <id>org.ros.highlighter.ros-msg</id>
     <name>ROS Interface Syntax Highlighter</name>
-    <version>1.0.3</version>
-    <idea-version since-build="243" until-build="999.*"/>
+    <version>1.0.4</version>
+    <idea-version since-build="243"/>
     <icon>META-INF/pluginIcon.svg</icon>
     <vendor email="zhubeilife@gmail.com" url="https://github.com/zhangbei21">zhangbei21</vendor>
 
@@ -35,6 +35,10 @@
     ]]></description>
 
     <change-notes><![CDATA[
+        <h3>1.0.4</h3>
+        <ul>
+            <li>Added distinct file icons for <code>.msg</code>, <code>.srv</code>, and <code>.action</code> files in the Project tree</li>
+        </ul>
         <h3>1.0.3</h3>
         <ul>
             <li>Refactored to use TextMate bundle loaded via <code>BundledTextMateResourcesProvider</code></li>
@@ -58,6 +62,8 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <textmate.bundleProvider
-            implementation="org.ros.clion.highlighter.RosTextMateBundleProvider"/>
+            implementation="org.ros.highlighter.RosTextMateBundleProvider"/>
+        <iconProvider
+            implementation="org.ros.highlighter.RosIconProvider"/>
     </extensions>
 </idea-plugin>

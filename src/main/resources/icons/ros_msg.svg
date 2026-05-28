@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+  <!-- .msg: blue — data message -->
+  <rect x="1" y="1" width="14" height="14" rx="3" fill="#0288D1"/>
+  <!-- small node dot top-right -->
+  <circle cx="12.5" cy="3.5" r="1.8" fill="#4FC3F7"/>
+  <!-- "M" label -->
+  <text x="7.5" y="12" font-family="Arial,Helvetica,sans-serif" font-size="8.5"
+        font-weight="bold" text-anchor="middle" fill="white">M</text>
+</svg>

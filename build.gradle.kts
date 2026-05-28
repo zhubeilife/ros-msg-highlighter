@@ -8,8 +8,8 @@ java {
     targetCompatibility = JavaVersion.VERSION_21
 }
 
-group = "org.ros.clion"
-version = "1.0.3"
+group = "org.ros.highlighter"
+version = "1.0.4"
 
 repositories {
     mavenCentral()
@@ -40,7 +40,7 @@ intellijPlatform {
 
 tasks.patchPluginXml {
     sinceBuild.set("243")
-    untilBuild.set("999.*")
+    untilBuild.set(provider { null })
 }
 
 tasks {
