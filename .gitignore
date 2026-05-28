@@ -1,0 +1,17 @@
+# Gradle build output
+build/
+
+# Gradle cache
+.gradle/
+
+# IntelliJ Platform local artifacts
+.intellijPlatform/
+
+# IDE local settings (IntelliJ)
+.idea/
+*.iml
+*.iws
+
+# OS files
+.DS_Store
+Thumbs.db

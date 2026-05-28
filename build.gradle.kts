@@ -4,12 +4,12 @@ plugins {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 group = "org.ros.clion"
-version = "1.0.0"
+version = "1.0.3"
 
 repositories {
     mavenCentral()
@@ -18,10 +18,12 @@ repositories {
     }
 }
 
+val clionHome = "/home/zhangbeipc/.local/share/JetBrains/Toolbox/apps/clion"
+
 dependencies {
-    testImplementation("junit:junit:4.13.2")
+    compileOnly(files("$clionHome/plugins/textmate-plugin/lib/modules/intellij.textmate.jar"))
     intellijPlatform {
-        clion("2024.1")
+        local(clionHome)
         bundledPlugin("org.jetbrains.plugins.textmate")
     }
 }
@@ -31,25 +33,30 @@ intellijPlatform {
         version = project.version.toString()
     }
     instrumentCode = false
+    publishing {
+        token.set(providers.environmentVariable("PUBLISH_TOKEN"))
+    }
 }
 
 tasks.patchPluginXml {
-    sinceBuild.set("241")
-    untilBuild.set("243.*")
+    sinceBuild.set("243")
+    untilBuild.set("999.*")
 }
 
 tasks {
-    // Copy the TextMate bundle to the plugin's sandbox
-    val copyTextmate by registering(Copy::class) {
-        from(layout.projectDirectory.dir("src/main/resources/textmate")) {
-            into("textmate")
-        }
-        into(layout.buildDirectory.dir("idea-sandbox/plugins/${project.name}/"))
+    // Textmate bundle must live at the plugin root (not inside the JAR) so that
+    // PluginManagerCore.getPlugin(...).getPluginPath().resolve("textmate/ROS") resolves correctly.
+    jar {
+        exclude("textmate/**")
     }
 
-    // Ensure textmate bundle is copied before running the IDE
-    runIde {
-        dependsOn(copyTextmate)
+    // prepareSandbox populates the sandbox directory; buildPlugin packages it into the ZIP.
+    // Both runIde and buildPlugin depend on prepareSandbox, so adding the textmate dir here
+    // ensures it is present in both the dev sandbox and the final distribution.
+    prepareSandbox {
+        from(layout.projectDirectory.dir("src/main/resources/textmate")) {
+            into("${project.name}/textmate")
+        }
     }
 
     buildSearchableOptions {

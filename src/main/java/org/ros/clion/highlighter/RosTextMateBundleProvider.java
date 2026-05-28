@@ -1,11 +1,11 @@
 package org.ros.clion.highlighter;
 
+import com.intellij.ide.plugins.PluginManagerCore;
+import com.intellij.openapi.extensions.PluginId;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.textmate.api.TextMateBundleProvider;
-import org.jetbrains.plugins.textmate.api.TextMateBundleProvider.PluginBundle;
 
-import java.io.File;
-import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
@@ -14,15 +14,10 @@ public class RosTextMateBundleProvider implements TextMateBundleProvider {
 
     @Override
     public @NotNull List<PluginBundle> getBundles() {
-        URL bundleUrl = getClass().getClassLoader().getResource("textmate/ROS");
-        if (bundleUrl == null) {
-            return Collections.emptyList();
-        }
-        File bundleDir = new File(bundleUrl.getPath());
-        if (!bundleDir.exists() || !bundleDir.isDirectory()) {
-            return Collections.emptyList();
-        }
-        PluginBundle bundle = new PluginBundle("ROS Interface", bundleDir.toPath());
-        return List.of(bundle);
+        var plugin = PluginManagerCore.getPlugin(PluginId.getId("org.ros.clion.ros-msg-highlighter"));
+        if (plugin == null) return Collections.emptyList();
+        Path bundlePath = plugin.getPluginPath().resolve("textmate/ROS");
+        if (!Files.isDirectory(bundlePath)) return Collections.emptyList();
+        return List.of(new PluginBundle("ROS Interface", bundlePath));
     }
 }

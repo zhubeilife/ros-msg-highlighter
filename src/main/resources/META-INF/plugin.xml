@@ -1,8 +1,10 @@
 <idea-plugin>
     <id>org.ros.clion.ros-msg-highlighter</id>
     <name>ROS Interface Syntax Highlighter</name>
-    <version>1.0.0</version>
-    <vendor url="https://github.com/zhangbeipc">ROS Developer</vendor>
+    <version>1.0.3</version>
+    <idea-version since-build="243" until-build="999.*"/>
+    <icon>META-INF/pluginIcon.svg</icon>
+    <vendor email="zhubeilife@gmail.com" url="https://github.com/zhangbei21">zhangbei21</vendor>
 
     <description><![CDATA[
         <h2>ROS Interface Syntax Highlighting for CLion</h2>
@@ -25,7 +27,6 @@
             <li>Separator highlighting (<code>---</code>, <code>===</code>, <code>MSG:</code>)</li>
             <li><code>@optional</code> attribute highlighting</li>
             <li>Array bracket matching</li>
-            <li>Customizable colors via Settings → Editor → Color Scheme → ROS Interface</li>
         </ul>
         <p>
         Uses the <a href="https://github.com/jtbandes/ros-tmlanguage">ROS Interface TextMate grammar</a>
@@ -34,43 +35,28 @@
     ]]></description>
 
     <change-notes><![CDATA[
+        <h3>1.0.3</h3>
+        <ul>
+            <li>Refactored to use TextMate bundle loaded via <code>BundledTextMateResourcesProvider</code></li>
+            <li>Removed custom PSI/lexer layer; TextMate grammar now handles all tokenization</li>
+            <li>Improved compatibility with CLion 2024.3 and later</li>
+        </ul>
+        <h3>1.0.1</h3>
+        <ul>
+            <li>Switched to TextMate-only architecture for reliable highlighting</li>
+            <li>Fixed TextMate bundle loading in packaged plugin</li>
+        </ul>
         <h3>1.0.0</h3>
         <ul>
             <li>Initial release</li>
             <li>Syntax highlighting for .msg, .srv, .action files via TextMate bundle</li>
-            <li>Customizable color scheme settings</li>
         </ul>
     ]]></change-notes>
 
-    <!-- Dependencies -->
     <depends>com.intellij.modules.platform</depends>
     <depends>org.jetbrains.plugins.textmate</depends>
 
-    <!-- Extensions -->
     <extensions defaultExtensionNs="com.intellij">
-        <!-- File type registration -->
-        <fileType
-            name="ROSInterface"
-            implementationClass="org.ros.clion.highlighter.RosInterfaceFileType"
-            fieldName="INSTANCE"
-            language="ROSInterface"
-            extensions="msg;srv;action"/>
-
-        <!-- Language definition -->
-        <lang.parserDefinition
-            language="ROSInterface"
-            implementationClass="org.ros.clion.highlighter.RosInterfaceParserDefinition"/>
-
-        <!-- Syntax highlighter factory (fallback) -->
-        <lang.syntaxHighlighterFactory
-            language="ROSInterface"
-            implementationClass="org.ros.clion.highlighter.RosSyntaxHighlighterFactory"/>
-
-        <!-- Color settings page -->
-        <colorSettingsPage
-            implementation="org.ros.clion.highlighter.RosColorSettingsPage"/>
-
-        <!-- TextMate bundle provider (primary highlighting mechanism) -->
         <textmate.bundleProvider
             implementation="org.ros.clion.highlighter.RosTextMateBundleProvider"/>
     </extensions>

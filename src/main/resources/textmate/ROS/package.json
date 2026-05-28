@@ -16,7 +16,7 @@
       {
         "language": "rosmsg",
         "scopeName": "source.rosmsg",
-        "path": "./ROS%20Interface.tmLanguage"
+        "path": "./ros-interface.tmLanguage.json"
       }
     ]
   }
