@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>org.ros.highlighter.ros-msg</id>
     <name>ROS Interface Syntax Highlighter</name>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <idea-version since-build="243"/>
     <icon>META-INF/pluginIcon.svg</icon>
     <vendor email="zhubeilife@gmail.com" url="https://github.com/zhangbei21">zhangbei21</vendor>

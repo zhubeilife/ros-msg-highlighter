@@ -9,7 +9,7 @@ java {
 }
 
 group = "org.ros.highlighter"
-version = "1.0.4"
+version = "1.0.5"
 
 repositories {
     mavenCentral()
@@ -45,7 +45,8 @@ tasks.patchPluginXml {
 
 tasks {
     // Textmate bundle must live at the plugin root (not inside the JAR) so that
-    // PluginManagerCore.getPlugin(...).getPluginPath().resolve("textmate/ROS") resolves correctly.
+    // getProtectionDomain().getCodeSource().getLocation() → getParent().getParent().resolve("textmate/ROS")
+    // correctly locates it without using internal PluginManagerCore APIs.
     jar {
         exclude("textmate/**")
     }
