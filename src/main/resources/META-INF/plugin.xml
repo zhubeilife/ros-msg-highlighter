@@ -35,6 +35,10 @@
     ]]></description>
 
     <change-notes><![CDATA[
+        <h3>1.0.5</h3>
+        <ul>
+            <li>Replaced internal <code>PluginManagerCore.getPlugin()</code> API with a classloader-based path resolution to comply with IntelliJ Platform API guidelines</li>
+        </ul>
         <h3>1.0.4</h3>
         <ul>
             <li>Added distinct file icons for <code>.msg</code>, <code>.srv</code>, and <code>.action</code> files in the Project tree</li>
