@@ -7,6 +7,9 @@ build/
 # IntelliJ Platform local artifacts
 .intellijPlatform/
 
+# Legacy extracted plugin directory
+ros-msg-highlighter/
+
 # IDE local settings (IntelliJ)
 .idea/
 *.iml
